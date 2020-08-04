@@ -5,12 +5,12 @@ __Github__ = "https://github.com/orgs/POC-AWS-services/dashboard"
 
 
 
+import boto3
+
 # Create IAM client
 iam = boto3.client('iam')
 
-# Create user
-response = iam.create_user(
-    UserName='IAM_USER_NAME'
-)
-
-print(response)
+# List users with the pagination interface
+paginator = iam.get_paginator('list_users')
+for response in paginator.paginate():
+    print(response)
